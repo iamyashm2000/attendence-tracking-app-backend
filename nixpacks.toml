@@ -1,0 +1,14 @@
+# nixpacks.toml
+
+# Setup phase ensures Node.js and npm are installed. 
+# You don't need to specify Node version here if package.json has "engines".
+
+[phases.setup]
+nixpkgs = ["nodejs"]  # This will pick the Node.js version based on your package.json engines field
+
+# Override install phase to use legacy-peer-deps flag
+[phases.install]
+cmds = ["npm i --legacy-peer-deps"]
+
+# We skip defining build and start phases to use Nixpacks intelligent defaults
+# This runs "npm run build" and "npm run start" respectively for Next.js projects
